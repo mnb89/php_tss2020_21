@@ -8,15 +8,15 @@ require "./lib/JSONReader.php";
 // CONTROLLER $tasklist = JSONReader()
 $tasklist = JSONReader('./dataset/TaskList.json');
 
+// versione con if
+if(isset($_GET['searchText'])){
+    $searchText=trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
+}else{
+    $searchText='';
+}
 
-
-
-
-
-
-
-
-
+// versione contratta
+// $searchText = isset($_GET['searchText']) ? trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
 
 
 ?>
@@ -36,8 +36,8 @@ $tasklist = JSONReader('./dataset/TaskList.json');
 
 </head>
 <body>
-    <form action="">
-        <input type="text" name="searchText">
+    <form action="index.php">
+        <input type="text" name="searchText" value="<?=$searchText?>">
 
         <button type="submit">CERCA</button>
     </form>
