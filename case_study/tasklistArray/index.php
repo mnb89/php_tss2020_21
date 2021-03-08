@@ -2,25 +2,23 @@
 
 // Carico le dipendenze - è tutto quello che mi serve per eseguire le mie operazioni
 require "./lib/JSONReader.php";
+require "./lib/searchFunctions.php";
+
 
 
 // MODEL (JSONReader) - parte che gestisce i dati dell'applicazione
 // CONTROLLER $tasklist = JSONReader()
-$tasklist = JSONReader('./dataset/TaskList.json');
+$taskList = JSONReader('./dataset/TaskList.json');
 
 // versione con if
 if(isset($_GET['searchText'])){
     $searchText=trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
+    $taskList = array_filter($taskList, searchText($searchText));
 }else{
     $searchText='';
 }
 
-// versione contratta
-// $searchText = isset($_GET['searchText']) ? trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
-
-
 ?>
-
 
 <!-- ------------------------------------------------------------------------------------------------------ -->
 
@@ -44,7 +42,7 @@ if(isset($_GET['searchText'])){
 
     <ul>
         <?php
-        foreach ($tasklist as $key => $task) { ?>
+        foreach ($taskList as $key => $task) { ?>
 
             <?php
             $status = $task['status'];
