@@ -1,7 +1,7 @@
 
 - [x] task-1: visualizzare un elenco html con tutte le task
 
-- [ ] task-2: form con ricerca testuale
+- [/] task-2: form con ricerca testuale
 
     - [ ] task-2.1 costruire la funzione di ricerca
 
