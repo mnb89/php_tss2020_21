@@ -18,14 +18,27 @@ if(isset($_GET['searchText']) && trim($_GET['searchText'])!==''){
     // die();
 
     $taskList = array_filter($taskList, searchTextDichiarative($searchText));
+    
     // $taskList = searchTextImperative($searchText, $taskList);
 }else{
     $searchText='';
 }
 
+if(isset($_GET['status']) && ($_GET['status'])!=='all'){
+    $status=($_GET['status']);
 
+    
+    $taskList= array_filter($taskList, searchStatus($status));
+    
+}else{
+    
+    $status='all';
 
+    
+    // var_dump($status);
+    // var_dump($_GET['status']);
 
+}
 
 ?>
 
@@ -47,6 +60,18 @@ if(isset($_GET['searchText']) && trim($_GET['searchText'])!==''){
         <input type="text" name="searchText" value="<?=$searchText?>">
 
         <button type="submit">CERCA</button>
+
+        <div id="status">
+            <input type="radio" name="status" id="progress" value="progress">
+            <label for="progress">PROGRESS</label> 
+            <input type="radio" name="status" id="done" value="done"> 
+            <label for="done">DONE</label> 
+            <input type="radio" name="status" id="todo" value="todo">
+            <label for="todo">TO DO</label> 
+            <input type="radio" name="status" id="all" value="all">
+            <label for="all">ALL</label> 
+        </div>
+
     </form>
 
     <ul>
@@ -64,10 +89,9 @@ if(isset($_GET['searchText']) && trim($_GET['searchText'])!==''){
             </li>
         
         <?php } ?>
-
-
-
     </ul>
+
+
 
 </body>
 </html>
