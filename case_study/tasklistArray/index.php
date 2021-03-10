@@ -13,7 +13,8 @@ $taskList = JSONReader('./dataset/TaskList.json');
 // versione con if
 if(isset($_GET['searchText'])){
     $searchText=trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
-    $taskList = array_filter($taskList, searchText($searchText));
+    // $taskList = array_filter($taskList, searchTextDichiarative($searchText));
+    $taskList = searchTextImperative($searchText, $taskList);
 }else{
     $searchText='';
 }
@@ -56,10 +57,7 @@ if(isset($_GET['searchText'])){
         
         <?php } ?>
 
-<!--         
-        <li class="tasklist-item tasklist-item-progress">Latte <b>progress</b></li>
-        <li class="tasklist-item tasklist-item-done">Uova <b>done</b></li>
-        <li class="tasklist-item tasklist-item-todo">Burro <b>todo</b></li> -->
+
 
     </ul>
 
