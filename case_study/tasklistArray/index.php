@@ -11,13 +11,21 @@ require "./lib/searchFunctions.php";
 $taskList = JSONReader('./dataset/TaskList.json');
 
 // versione con if
-if(isset($_GET['searchText'])){
+if(isset($_GET['searchText']) && trim($_GET['searchText'])!==''){
     $searchText=trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
-    // $taskList = array_filter($taskList, searchTextDichiarative($searchText));
-    $taskList = searchTextImperative($searchText, $taskList);
+
+    // var_dump($searchText, $_GET['searchText']);
+    // die();
+
+    $taskList = array_filter($taskList, searchTextDichiarative($searchText));
+    // $taskList = searchTextImperative($searchText, $taskList);
 }else{
     $searchText='';
 }
+
+
+
+
 
 ?>
 
