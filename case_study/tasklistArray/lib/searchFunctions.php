@@ -37,3 +37,26 @@ function searchTextImperative(string $searchText, array $taskList):array{
     }
     return $result;
 }
+
+
+
+/**
+ * Ricerca delle task con un determinato stato di progressione.
+ * 
+ * @param string $status è la stringa che corrisponde allo stato da cercare
+ * (progress|done|todo)
+ * @return callback la funzione che verrà utilizzata da array_filter
+ */
+
+function searchStatus(string $status){
+
+    return function ($taskItem) use ($status){ 
+
+        if ($status!='all') {
+            $result = strpos($taskItem['status'], $status) !==false;
+        }else{
+            $result = "";
+        }
+        return $result;
+    };
+}

@@ -14,18 +14,49 @@ $taskList = JSONReader('./dataset/TaskList.json');
 if(isset($_GET['searchText']) && trim($_GET['searchText'])!==''){
     $searchText=trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
 
-    // var_dump($searchText, $_GET['searchText']);
-    // die();
-
     $taskList = array_filter($taskList, searchTextDichiarative($searchText));
+    
     // $taskList = searchTextImperative($searchText, $taskList);
+    if(isset($_GET['status']) && ($_GET['status'])!=='all'){
+        $status=($_GET['status']);
+    
+        
+        $taskList= array_filter($taskList, searchStatus($status));
+        
+    }else{
+        
+        $status='all';
+    }
 }else{
+
     $searchText='';
+
+    if(isset($_GET['status']) && ($_GET['status'])!=='all'){
+        $status=($_GET['status']);
+    
+        
+        $taskList= array_filter($taskList, searchStatus($status));
+        
+    }else{
+        
+        $status='all';
+    }
 }
 
 
 
 
+
+// if(isset($_GET['status']) && ($_GET['status'])!=='all'){
+//     $status=($_GET['status']);
+
+    
+//     $taskList= array_filter($taskList, searchStatus($status));
+    
+// }else{
+    
+//     $status='all';
+// }
 
 ?>
 
@@ -47,7 +78,24 @@ if(isset($_GET['searchText']) && trim($_GET['searchText'])!==''){
         <input type="text" name="searchText" value="<?=$searchText?>">
 
         <button type="submit">CERCA</button>
+
+        <div id="status">
+            <input type="radio" name="status" id="progress" value="progress" <?php if (isset($status) && $status== "progress") echo "checked";?>>
+            <label for="progress">PROGRESS</label> 
+            <input type="radio" name="status" id="done" value="done" <?php if (isset($status)&& $status== "done") echo "checked";?>> 
+            <label for="done">DONE</label> 
+            <input type="radio" name="status" id="todo" value="todo" <?php if (isset($status)&& $status== "todo") echo "checked";?>>
+            <label for="todo">TO DO</label> 
+            <input type="radio" name="status" id="all" value="all" <?php if (isset($status)&& $status== "all") echo "checked";?>>
+            <label for="all">ALL</label> 
+        </div>
+
     </form>
+
+
+
+    <p><?= "Risultato: "?><b><?=count($taskList)?></b><?=" task per: "?><b><?=$searchText?></b><?=" filtro: "?><b><?=$status?></b></p>
+
 
     <ul>
         <?php
@@ -64,10 +112,9 @@ if(isset($_GET['searchText']) && trim($_GET['searchText'])!==''){
             </li>
         
         <?php } ?>
-
-
-
     </ul>
+
+
 
 </body>
 </html>
