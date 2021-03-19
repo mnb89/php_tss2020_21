@@ -6,6 +6,8 @@ $taskList = JSONReader('./dataset/TaskList.json');
 
 // print_r($taskList);
 
+//imperativo
+
 $taskListObj=[];
 foreach ($taskList as $taskArray){
     $taskObj = new Task();
@@ -17,6 +19,20 @@ foreach ($taskList as $taskArray){
     $taskListObj[] = $taskObj;
 
 }
+
+//dichiarativo --> programmazione funzionale
+
+$taskListObj2=array_map(function($taskArray){
+    
+    $taskObj = new Task();
+    $taskObj->id = $taskArray['id'];
+    $taskObj->taskName = $taskArray['taskName'];
+    $taskObj->status = $taskArray['status'];
+    $taskObj->expirationDate = $taskArray['expirationDate'];
+
+    return $taskObj;
+
+}, $taskList);
 
 // print_r($taskListObj);
 
