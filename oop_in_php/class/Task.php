@@ -13,9 +13,30 @@ class Task {
         // istanza della classe DateTime
         $today = new DateTime();
         $task = new Datetime($this->expirationDate);
-        // gettype($today) // object
-        // get_class($today) // DateTime
-        return $task > $today;
+        
+        echo $task->getTimestamp()."\n";
+        echo $today->getTimestamp()."\n";
+
+
+        //versione fatta da me
+
+        // $todaysecond = $today->getTimestamp();
+        // $tasksecond = ($task->getTimestamp())+86400;
+        // echo $tasksecond."\n";
+        // echo $todaysecond."\n";
+
+        // return $tasksecond <= $todaysecond;
+
+        /*-------------------------------------------*/
+
+        //versione suggerita dal prof
+
+        if($today->format('Ymd') === $task->format('Ymd')){
+            return false;
+        }else{
+            return $task->getTimestamp() <= $today->getTimestamp();
+
+        }
     }
 
     public function getExpirationDate(){
