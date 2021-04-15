@@ -6,6 +6,7 @@ try {
 
     $conn = new PDO ('mysql:dbname=corso_formarete;host=localhost','root','');
 
+
     $stm = $conn->prepare('select * from User;');
 
     $stm->execute();
