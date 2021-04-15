@@ -2,7 +2,6 @@
 -- create database if not exists corso_formarete;
 
 -- show databases;
-use corso_formarete;
 
 -- create table if not exists User(
 --     userId int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -17,9 +16,10 @@ use corso_formarete;
 -- describe user;
 
 
-insert into user (firstName,lastName,email,birthday)
-values ('Mario','Rossi','rossi.m@email.com','1980-01-20');
+-- insert into user (firstName,lastName,email,birthday)
+-- values ('Mario','Rossi','rossi.m@email.com','1980-01-20');
 
+use corso_formarete;
 select * from user;
 
 
